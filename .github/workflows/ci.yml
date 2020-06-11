@@ -1,9 +1,10 @@
 on: push
 name: CI
 jobs:
-  phpunit:
+  testing:
     runs-on: ubuntu-latest
-    container:
+    runs:
+      using: 'docker'
       image: 'Dockerfile'
     services:
       db:
