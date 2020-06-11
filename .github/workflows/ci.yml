@@ -1,0 +1,30 @@
+on: push
+name: CI
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: 'Dockerfile'
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_HOST: %
+          MYSQL_USER: joomla
+          MYSQL_PWD: joomla
+          MYSQL_DATABASE: sites_testing
+        #command: ["mysqld", "--sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"]
+        ports:
+          - 33306:3306
+        options: --sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Set up site
+        run: sh /usr/local/bin/bootstrap.sh
+
+      - name: Curl site
+        run curl -X GET http://localhost:8001
