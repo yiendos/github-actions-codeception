@@ -9,7 +9,7 @@ jobs:
       db:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_HOST: %
+          MYSQL_ROOT_HOST: "%"
           MYSQL_USER: joomla
           MYSQL_PWD: joomla
           MYSQL_DATABASE: sites_testing
