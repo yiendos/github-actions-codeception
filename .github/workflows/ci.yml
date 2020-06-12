@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-
       - name: build
         run: docker build --no-cache -t actions/codeception:local .
       - name: Compose
