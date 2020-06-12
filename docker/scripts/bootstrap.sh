@@ -5,7 +5,7 @@ set -e
 export PATH=/root/.composer/vendor/bin/:$PATH >> ~/.bashrc
 
 echo "Download site"
-joomla site:download testing
+#joomla site:download testing
 
 echo "Install site and db"
 
