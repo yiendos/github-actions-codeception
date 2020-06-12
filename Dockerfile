@@ -21,6 +21,8 @@ RUN apt update && \
     echo 'PATH=/root/.composer/vendor/bin/:$PATH' >> ~/.bashrc  && \
     composer global require joomlatools/console --no-interaction
 
+RUN chmod +x /usr/local/bin/bootstrap.sh
+
 EXPOSE 8081
 
 WORKDIR /var/www/
