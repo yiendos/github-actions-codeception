@@ -7,7 +7,6 @@ docker-compose up --detach
 docker-compose exec demo /bin/sh -c "/usr/local/bin/bootstrap.sh"
 
 
-
 to run on github actions
 docker-compose run demo "/usr/local/bin/bootstrap.sh"
 
