@@ -18,9 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Run tests
-        run: docker-compose up
 
+      - name: build
+        run: docker build --no-cache -t actions/codeception:local .
+      - name: Compose
+        run: docker-compose up
       - name: Set up site
         run: docker-compose exec demo /bin/sh -c "/usr/local/bin/bootstrap.sh"
 
