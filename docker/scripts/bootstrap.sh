@@ -2,6 +2,8 @@
 
 set -e
 
+rm -Rf /var/www/testing
+
 export PATH=/root/.composer/vendor/bin/:$PATH >> ~/.bashrc
 
 echo "Download site"
