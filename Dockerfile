@@ -1,8 +1,6 @@
 FROM timble/demo:latest AS local
 
 ENV ENVIRONMENT "development"
-ENV CAMPAIGNMONITOR_API_KEY "abc"
-ENV CAMPAIGNMONITOR_LIST_ID "abc"
 
 ENV MYSQL_HOST "192.168.0.1"
 ENV MYSQL_USER "joomla"
