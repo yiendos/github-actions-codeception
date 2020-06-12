@@ -11,4 +11,4 @@ echo "Install site and db"
 
 #joomla site:install testing --mysql-host=db --mysql-port=3306 --mysql-login=joomla:joomla --drop
 
-joomla site:create testing --mysql-host=db --mysql-port=3306 --mysql-login=joomla:joomla --drop
+joomla site:create testing --mysql-host=db --mysql-port=3306 --mysql-login=joomla:joomla
