@@ -33,5 +33,5 @@ jobs:
       - name: Set up site
         run: docker-compose run demo "/usr/local/bin/bootstrap.sh"
       - name: Curl site
-        run: curl -X GET http://localhost:8001
+        run: curl -X GET http://localhost:8081
       #- name: List directory
