@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: build base image
-        run: docker build --no-cache -t actions/codeception:local .
       - name: Remove previous images
         run: docker-compose rm -f
+      - name: build base image
+        run: docker build --no-cache -t actions/codeception:local .
       - name: Compose
         run: docker-compose up  --build -d
       - name: Get environment details
