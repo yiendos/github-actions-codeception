@@ -18,10 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Ensure all containers are rebuild
-        run: docker-compose build
       - name: Compose
-        run: docker-compose up --detach
+        run: docker-compose up  --build -d
       - name: Get environment details
         run: printenv
       - name: List docker containers
