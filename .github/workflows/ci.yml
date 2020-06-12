@@ -24,7 +24,7 @@ jobs:
       - name: Compose
         run: docker-compose up --detach
       - name: Set up site
-        run: docker-compose exec demo /bin/sh -c "/usr/local/bin/bootstrap.sh"
+        run: docker-compose exec demo -c "/usr/local/bin/bootstrap.sh"
 
       - name: Curl site
         run: curl -X GET http://localhost:8001
