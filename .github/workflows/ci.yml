@@ -22,7 +22,7 @@ jobs:
       - name: build
         run: docker build --no-cache -t actions/codeception:local .
       - name: Compose
-        run: docker-compose up
+        run: docker-compose up --detach
       - name: Set up site
         run: docker-compose exec demo /bin/sh -c "/usr/local/bin/bootstrap.sh"
 
