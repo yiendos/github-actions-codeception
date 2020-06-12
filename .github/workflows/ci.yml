@@ -26,6 +26,8 @@ jobs:
         run: printenv
       - name: List docker containers
         run: docker container ps
+      - name: Sleep, wait for db
+        run: sleep 5
       - name: Set up site
         run: docker-compose run demo "/usr/local/bin/bootstrap.sh"
       - name: Curl site
