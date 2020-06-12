@@ -19,16 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
+        run: docker-compose up --exit-code-from
 
       - name: Set up site
-        run: sh /usr/local/bin/bootstrap.sh
+        run: docker-compose exec demo /bin/sh -c "/usr/local/bin/bootstrap.sh"
 
       - name: Curl site
         run curl -X GET http://localhost:8001

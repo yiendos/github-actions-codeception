@@ -10,9 +10,9 @@ ENV MYSQL_PWD  "joomla"
 ENV MYSQL_DB   "sites_testing"
 
 # Install the application
-COPY ../../docker/scripts /usr/local/bin/
-COPY ../../docker/nginx/demo.conf /etc/nginx/sites-available/default
-COPY ../../docker/php/override.conf /etc/php/7.3/fpm/pool.d/override.conf
+COPY docker/scripts /usr/local/bin/
+COPY docker/nginx/demo.conf /etc/nginx/sites-available/default
+COPY docker/php/override.conf /etc/php/7.3/fpm/pool.d/override.conf
 
 RUN apt update && \
     apt install curl git unzip -y && \
