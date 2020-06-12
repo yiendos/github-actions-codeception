@@ -1,0 +1,34 @@
+on: push
+name: CI
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    #services:
+    #  db:
+    #    image: mysql:5.7
+    #    env:
+    #      MYSQL_ROOT_HOST: "%"
+    #      MYSQL_USER: joomla
+    #      MYSQL_PWD: joomla
+    #      MYSQL_DATABASE: sites_testing
+        #command: ["mysqld", "--sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"]
+    #    ports:
+    #      - 33306:3306
+    #    options: --sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      run: |
+        if [ -f docker-compose.test.yml ]; then
+          docker-compose --file docker-compose.test.yml build
+          docker-compose --file docker-compose.test.yml run sut
+        else
+          docker build . --file Dockerfile
+        fi
+
+      - name: Set up site
+        run: sh /usr/local/bin/bootstrap.sh
+
+      - name: Curl site
+        run curl -X GET http://localhost:8001
