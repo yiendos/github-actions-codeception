@@ -1,7 +1,20 @@
 version: '3.2'
 
 services:
+  db:
+    image: mysql/mysql-server:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=0
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=sites_testing
+      - MYSQL_USER=joomla
+      - MYSQL_PASSWORD=joomla
+    command: ["mysqld", "--sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"]
   demo:
+    depends_on:
+      - db
     image: actions/codeception:local
     ports:
       - "8081:8081"
@@ -14,16 +27,3 @@ services:
       - PHP_OPCACHE_ENABLE=off
       - PHP_DISPLAY_ERRORS=on
       - PHP_ERROR_REPORTING=30719
-    volumes:
-      - .:/var/www:cached
-  db:
-    image: mysql/mysql-server:5.7
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=0
-      - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=sites_testing
-      - MYSQL_USER=joomla
-      - MYSQL_PASSWORD=joomla
-    command: ["mysqld", "--sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"]
