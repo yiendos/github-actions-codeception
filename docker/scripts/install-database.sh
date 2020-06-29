@@ -2,17 +2,29 @@
 
 set -e
 
-echo "Install site and db"
-
+echo "* Waiting 10 seconds for database"
 sleep 10
 
 export PATH=/root/.composer/vendor/bin/:$PATH >> ~/.bashrc
 
-cp -RP /tmp/testing/* /var/www/testing/
+if [ ! -e "/var/www/testing/_installation" ]; then
 
-joomla database:install testing --mysql-host=db --mysql-login=joomla:joomla --sql-dumps=/var/www/testing/installation/sql/mysql/base.sql --sql-dumps=/var/www/testing/installation/sql/mysql/extensions.sql --sql-dumps=/var/www/testing/installation/sql/mysql/supports.sql --sql-dumps=/tmp/joomla_beta_users.sql --drop;
+  echo "* Install site and db"
 
-joomla site:configure testing --mysql-host=db --mysql-login=joomla:joomla;
+  echo "* copy existing site from /tmp to web root"
 
-#probably safe to delete this is the point of supervisord
-tail -f /dev/null
+  cp -R /tmp/testing/* /var/www/testing/
+
+  echo "* Install database"
+
+  joomla database:install testing --mysql-host=db --mysql-login=joomla:joomla --sql-dumps=/tmp/testing/installation/sql/mysql/base.sql --sql-dumps=/tmp/testing/installation/sql/mysql/extensions.sql --sql-dumps=/tmp/testing/installation/sql/mysql/supports.sql --sql-dumps=/tmp/joomla_beta_users.sql --drop;
+
+  echo "* Configure site"
+
+  joomla site:configure testing --mysql-host=db --mysql-login=joomla:joomla;
+
+  echo "* Reset web root permissions"
+
+  chown -R www-data:www-data /var/www/testing
+fi;
+
