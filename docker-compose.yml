@@ -15,7 +15,7 @@ services:
   demo:
     depends_on:
       - db
-    image: actions/codeception:local
+    build: .
     ports:
       - "8081:8081"
     environment:
