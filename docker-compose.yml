@@ -27,3 +27,5 @@ services:
       - PHP_OPCACHE_ENABLE=off
       - PHP_DISPLAY_ERRORS=on
       - PHP_ERROR_REPORTING=30719
+    volumes:
+      - .:/var/www:cached
