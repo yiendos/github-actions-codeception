@@ -21,7 +21,7 @@ if [ ! -e "/var/www/testing/_installation" ]; then
 
   echo "* Configure site"
 
-  joomla site:configure testing --mysql-host=db --mysql-login=joomla:joomla;
+  joomla site:configure testing --mysql-host=db --mysql-login=joomla:joomla --options=/tmp/config.yml;
 
   echo "* Reset web root permissions"
 

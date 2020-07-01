@@ -12,6 +12,11 @@ services:
       - MYSQL_USER=joomla
       - MYSQL_PASSWORD=joomla
     command: ["mysqld", "--sql-mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"]
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
   demo:
     depends_on:
       - db

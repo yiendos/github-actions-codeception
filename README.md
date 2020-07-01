@@ -1,5 +1,9 @@
 # github-actions-codeception
 
+cd yiendos 
+
+docker build --no-cache -t yiendos/nginx:local .
+
 docker build --no-cache -t actions/codeception:local .
 
 docker-compose up --detach
