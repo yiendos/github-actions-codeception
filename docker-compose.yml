@@ -33,4 +33,4 @@ services:
       - PHP_DISPLAY_ERRORS=on
       - PHP_ERROR_REPORTING=30719
     volumes:
-      - ./testing/:/var/www/html:cached
+      - ./html/:/var/www/html:cached
