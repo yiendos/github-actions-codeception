@@ -4,18 +4,27 @@ set -e
 
 export PATH=/root/.composer/vendor/bin/:$PATH >> ~/.bashrc
 
-echo "Download site"
+if [ ! -e /var/www/html/administrator ]; then
 
-joomla site:download testing --release=4.0.0-beta --www=/tmp
+  echo "Download site"
 
-echo "* remove some existing files"
+  joomla site:download testing --release=4.0.0-beta --www=/tmp
 
-rm -rf /tmp/testing/administrator/templates/atum/css; rm -rf /tmp/testing/templates/cassiopeia/css; rm -rf /tmp/testing/media/; rm -rf /tmp/testing/node_modules/; rm -rf /tmp/testing/libraries/vendor/;rm -f /tmp/testing/administrator/cache/autoload_psr4.php; rm -rf /tmp/testing/installation/template/css;
+  echo "* remove some existing files"
 
-echo "* install dependancies and run npm"
+  rm -rf /tmp/testing/administrator/templates/atum/css; rm -rf /tmp/testing/templates/cassiopeia/css; rm -rf /tmp/testing/media/; rm -rf /tmp/testing/node_modules/; rm -rf /tmp/testing/libraries/vendor/;rm -f /tmp/testing/administrator/cache/autoload_psr4.php; rm -rf /tmp/testing/installation/template/css;
 
-composer install --working-dir=/tmp/testing/ --ignore-platform-reqs; npm ci --prefix /tmp/testing/ --unsafe-perm;
+  echo "* install dependancies and run npm"
 
-echo "* finally create site root, before nginx started"
+  composer install --working-dir=/tmp/testing/ --ignore-platform-reqs; npm ci --prefix /tmp/testing/ --unsafe-perm;
 
-mkdir -p /var/www/testing
+else
+
+mkdir -p /tmp/testing/
+
+echo "* Copy installation files to tmp"
+
+  cp -R /var/www/html/_installation /tmp/testing/installation
+fi
+
+sh /usr/local/bin/install-database.sh
