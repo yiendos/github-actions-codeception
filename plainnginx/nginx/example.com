@@ -3,14 +3,15 @@ server {
 
         server_name  .*;
 
-        access_log  /var/log/nginx/access.log combined;
-        error_log   /var/log/nginx/error.log;
+        access_log  /dev/stdout combined;
+        error_log   /dev/stdout;
 
         root /var/www/html;
+
         index index.php index.html index.htm index.nginx-debian.html;
 
         location / {
-                try_files $uri $uri/ =404;
+            try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {
